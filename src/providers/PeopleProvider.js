@@ -1,5 +1,7 @@
 import React, { createContext, useContext } from 'react';
-import { UsePeople } from '../hooks/usePeople';
+import { useApiData } from '../hooks/useApiData';
+import { useFilteringUsers } from '../hooks/useFilteringUsers';
+import { useFanManagement } from '../hooks/useFanManagment';
 
 const PeopleContext = createContext(null);
 
@@ -9,21 +11,18 @@ export const usePeopleContext = () => {
 
 export const PeopleProvider = ({ children }) => {
   const {
-    data,
-    setData,
-    text,
-    onChangeText,
-    filteredUsers,
-    setApiUrl,
     apiUrl,
+    data,
+    loading,
+    setApiUrl,
+    setIsLoading,
+    setData,
     saveNamed,
     setSavedName,
-    fans,
-    setFans,
-    clearFans,
-    loading,
-    setIsLoading,
-  } = UsePeople();
+  } = useApiData();
+
+  const { text, onChangeText, filteredUsers } = useFilteringUsers(data);
+  const { fans, setFans, clearFans } = useFanManagement(setSavedName, setData);
   return (
     <PeopleContext.Provider
       value={{
