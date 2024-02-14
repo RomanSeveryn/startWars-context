@@ -99,9 +99,11 @@ export const MainScreen = () => {
           source={{ uri: `https://robohash.org/${item?.name}` }}
           style={styles.image}
         />
-        <Text style={styles.marginLeft}>{item?.name}</Text>
-        <Text style={styles.marginLeft}>{item?.birth_year}</Text>
-        <Text style={styles.marginLeft}>{item?.gender}</Text>
+        <View>
+          <Text style={styles.marginLeft}>{item?.name}</Text>
+          <Text style={styles.marginLeft}>{item?.birth_year}</Text>
+          <Text style={styles.marginLeft}>{item?.gender}</Text>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -112,7 +114,10 @@ export const MainScreen = () => {
 
       <View style={styles.list}>
         <View style={styles.buttonClearWrapper}>
-          <TouchableOpacity onPress={clearFans} style={styles.buttonClear}>
+          <TouchableOpacity
+            onPress={() => clearFans(data)}
+            style={styles.buttonClear}
+          >
             <Text style={styles.buttonClearText}>CLEAR FANS</Text>
           </TouchableOpacity>
         </View>
